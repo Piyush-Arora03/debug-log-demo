@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     if (file) {
       const buffer = await fileToBuffer(file);
 
-      const filename = generateFileName(mimeType);
+      const filename = generateFileName(mimeType,deviceId);
       const uploadDir = path.join(process.cwd(), "uploads");
       const fullPath = path.join(uploadDir, filename);
 

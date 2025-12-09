@@ -12,11 +12,10 @@ export function getExtensionFromMime(mimeType: string | null): string {
 /**
  * Generate a safe filename using timestamp + random number + extension.
  */
-export function generateFileName(mimeType: string | null): string {
+export function generateFileName(mimeType: string | null,deviceId:string): string {
   const ext = getExtensionFromMime(mimeType);
   const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 1000000);
-  return `${timestamp}_${random}.${ext}`;
+  return `${deviceId}_${timestamp}.${ext}`;
 }
 
 /**
