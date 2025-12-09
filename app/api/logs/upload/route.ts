@@ -8,8 +8,6 @@ export async function POST(req: Request) {
     const form = await req.formData();
 
     const deviceId = form.get("deviceId") as string;
-    const level = form.get("level") as any;
-    const message = form.get("message") as string;
     const timestamp = form.get("timestamp") as string;
     const tags = form.get("tags") as string;
 
@@ -36,9 +34,6 @@ export async function POST(req: Request) {
       .insertInto("logs")
       .values({
         device_id: deviceId,
-        level,
-        message,
-        timestamp: timestamp ? new Date(timestamp) : new Date(),
         tags: tags ? JSON.parse(tags) : null,
         file_path: filePath,
         mime_type: mimeType,
