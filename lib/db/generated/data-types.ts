@@ -1,11 +1,12 @@
 import { Generated } from 'kysely';
 export interface Log {
-  id: Generated<number>;
+  id: number;
   device_id: string;
-  tags: unknown | null;
-  file_path: string | null;      
-  mime_type: string | null;      
-  created_at: Generated<Date>;
+  tags: string[] | null;
+  file_path: string | null;
+  mime_type: string;
+  created_at: Date;
+  status?: 'pending' | 'processing' | 'completed' | 'failed';
 }
 
 export interface DB {
