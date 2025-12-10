@@ -27,3 +27,20 @@ export async function fetchLogs() {
       : new Date(row.created_at)
   }));
 }
+
+export async function updateLogStatus(id: number, status: 'pending' | 'processing' | 'completed' | 'failed') {
+  await db
+    .withSchema("debug_log")
+    .updateTable("logs")
+    .set({ status })
+    .where("id", "=", id)
+    .execute();
+}
+
+export async function deleteLog(id: number) {
+  await db
+    .withSchema("debug_log")
+    .deleteFrom("logs")
+    .where("id", "=", id)
+    .execute();
+}

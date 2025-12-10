@@ -1,5 +1,5 @@
 import { X, FileText, Download } from 'lucide-react';
-import type { Log } from '../page';
+import type { Log } from '@/lib/db/generated/data-types';
 
 interface FileViewModalProps {
   log: Log;

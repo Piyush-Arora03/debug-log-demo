@@ -4,17 +4,8 @@ import { useState, useEffect } from 'react';
 import { LogsTable } from './components/LogsTable';
 import { FileViewModal } from './components/FileViewModal';
 import { StatusUpdateModal } from './components/StatusUpdateModal';
-import { fetchLogs } from "./actions";
-
-export interface Log {
-  id: number;
-  device_id: string;
-  tags: string[] | null;
-  file_path: string | null;
-  mime_type: string;
-  created_at: Date;
-  status?: 'pending' | 'processing' | 'completed' | 'failed';
-}
+import { fetchLogs, deleteLog, updateLogStatus } from "./actions";
+import { Log } from '@/lib/db/generated/data-types';
 
 export default function App() {
   const [logs, setLogs] = useState<Log[]>([]);
@@ -27,11 +18,17 @@ export default function App() {
   }, []);
 
   const handleDelete = (id: number) => {
-    setLogs(prev => prev.filter(log => log.id !== id));
+    deleteLog(id).then(() => {
+      fetchLogs().then(setLogs);
+    });
   };
 
-  const handleStatusUpdate = (id: number, status: Log['status']) => {
-    setLogs(prev => prev.map(log => log.id === id ? { ...log, status } : log));
+  const handleStatusUpdate = (id: number, status: Log['status'],onClose:()=>void) => {
+    updateLogStatus(id, status).then(() => {
+      fetchLogs().then(setLogs).then(()=>{
+        onClose();
+      });
+    });
   };
 
   return (

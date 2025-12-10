@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from 'react';
 import { Search, Filter, FileText, Edit, Trash2, ChevronDown, Calendar as CalendarIcon, X } from 'lucide-react';
-import type { Log } from '../page'
+import type { Log } from '@/lib/db/generated/data-types';
 import { Calendar } from './ui/calendar';
 import type { DateRange } from 'react-day-picker';
 

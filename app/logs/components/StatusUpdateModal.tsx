@@ -1,12 +1,12 @@
 "use client";
 import { useState } from 'react';
 import { X, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
-import type { Log } from '../page';
+import type { Log } from '@/lib/db/generated/data-types';
 
 interface StatusUpdateModalProps {
   log: Log;
   onClose: () => void;
-  onUpdate: (id: number, status: Log['status']) => void;
+  onUpdate: (id: number, status: Log['status'],onClose:()=>void) => void;
 }
 
 const statusOptions: Array<{ value: Log['status']; label: string; icon: any; color: string }> = [
@@ -20,7 +20,7 @@ export function StatusUpdateModal({ log, onClose, onUpdate }: StatusUpdateModalP
   const [selectedStatus, setSelectedStatus] = useState<Log['status']>(log.status);
 
   const handleUpdate = () => {
-    onUpdate(log.id, selectedStatus);
+    onUpdate(log.id, selectedStatus,onClose);
   };
 
   return (

@@ -6,7 +6,7 @@ export interface Log {
   file_path: string | null;
   mime_type: string;
   created_at: Date;
-  status?: 'pending' | 'processing' | 'completed' | 'failed';
+  status: 'pending' | 'processing' | 'completed' | 'failed';
 }
 
 export interface DB {
