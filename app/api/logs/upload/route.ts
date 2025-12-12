@@ -13,8 +13,15 @@ export async function POST(req: Request) {
 
     const file = form.get("logfile") as File | null;
 
+    if(!file){
+      return Response.json({
+        success:false,
+        error:"No file uploaded"
+      },{status:400});
+    }
+
     let filePath :string|null= null;
-    let mimeType = file?.type ?? null;
+    let mimeType = file.type;
 
     if (file) {
       const buffer = await fileToBuffer(file);
@@ -25,7 +32,7 @@ export async function POST(req: Request) {
 
       fs.writeFileSync(fullPath, buffer);
 
-      filePath = `/uploads/${filename}`;
+      filePath = `uploads/${filename}`;
     }
 
     // INSERT using Kysely
@@ -34,9 +41,9 @@ export async function POST(req: Request) {
       .insertInto("logs")
       .values({
         device_id: deviceId,
-        tags: tags ? JSON.parse(tags) : null,
+        tags: tags,
         file_path: filePath,
-        mime_type: mimeType,
+        mime_type: mimeType
       })
       .returning("id")
       .executeTakeFirst();

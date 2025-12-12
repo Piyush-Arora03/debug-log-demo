@@ -45,7 +45,7 @@ export function LogsTable({ logs, onDelete, onViewFile, onUpdateStatus }: LogsTa
       const matchesSearch = !searchTerm ||
         log.device_id.toLowerCase().includes(searchLower) ||
         log.file_path?.toLowerCase().includes(searchLower) ||
-        log.tags?.some(tag => tag.toLowerCase().includes(searchLower)) ||
+        log.tags?.toLowerCase().includes(searchLower) ||
         log.id.toString().includes(searchLower);
 
       // Device filter
@@ -289,19 +289,9 @@ export function LogsTable({ logs, onDelete, onViewFile, onUpdateStatus }: LogsTa
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    {log.tags && log.tags.length > 0 ? (
-                      <div className="flex flex-wrap gap-1">
-                        {log.tags.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    ) : (
-                      <span className="text-gray-400 italic">—</span>
+                    { (
+                      <span className="text-gray-400 italic">{log.tags}
+                      </span>
                     )}
                   </td>
                   <td className="px-4 py-3">
