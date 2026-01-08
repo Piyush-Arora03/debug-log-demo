@@ -1,0 +1,33 @@
+{
+  "device_id": "abcd1234",
+  "policy_version": "1.0.0",
+  "kiosk_mode": {
+    "enabled": true,
+    "allowed_apps": ["io.pixelkube.pixplayerandroid/.ui.PixPlayerActivity"]
+  },
+  "device_owner": {
+    "enabled": true
+  },
+  "apps": [
+    {
+      "package_name": "io.pixelkube.pixplayerandroid",
+      "download_url": "https://76128266c6ca73.lhr.life/PixPlayerAndroid-release.apk",
+      "version_code": 2,
+      "mandatory": true
+    },
+    {
+      "package_name": "io.pixelkube.pixcontact",
+      "download_url": "https://76128266c6ca73.lhr.life/app-debug.apk",
+      "version_code": 1,
+      "mandatory": true
+    }
+  ],
+  "policy_server_url": "http://localhost:3000/api/policies",
+  "auth_server_url": "http://localhost:3000/api/auth",
+  "usb":{
+    "enabled": true
+  },
+  "adb_devopt":{
+    "enabled": true
+  }
+}
